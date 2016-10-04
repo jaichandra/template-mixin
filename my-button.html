@@ -19,7 +19,7 @@
   <script>
     'use strict';
 
-    let NdMixin = (superClass) => class extends superClass {
+    let StyleMixin = (superClass) => class extends superClass {
       static get template() {
         if (!this.hasOwnProperty('_template')) {
           // TODO(sorvell): support more ways to acquire template.
@@ -53,7 +53,7 @@
     }
 
     var parentElement = document.createElement('paper-button');
-    class MyButton extends NdMixin(parentElement.constructor) {
+    class MyButton extends StyleMixin(parentElement.constructor) {
       static get is() {
         return 'my-button';
       }
