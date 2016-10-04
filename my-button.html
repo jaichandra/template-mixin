@@ -58,37 +58,6 @@
         return 'my-button';
       }
 
-      static get template() {
-        if (!this.hasOwnProperty('_template')) {
-          // TODO(sorvell): support more ways to acquire template.
-          // this requires `is` on constructor...
-          this._template = Polymer.DomModule.import(this.is, 'template') ||
-            // note: implemented so a subclass can retrieve the super
-            // template; call the super impl this way so that `this` points
-            // to the superclass.
-            Object.getPrototypeOf(this.prototype).constructor.template;
-        }
-        return this._template;
-      }
-
-      static finalize() {
-        let parentTemplate = parentElement.constructor.template;
-        let cssText = Polymer.StyleGather.cssFromElement(this.template.cloneNode(true));
-        if (cssText) {
-          let style = document.createElement('style');
-          style.textContent = cssText;
-          parentTemplate.content.insertBefore(style, this.getInsertionPoint(parentTemplate));
-        }
-        this._template = parentTemplate.cloneNode(true);
-        super.finalize();
-      }
-
-      static getInsertionPoint(template) {
-        // return slot location or last element in the template (ignore the last text node);
-        return template.content.querySelectorAll('slot')[0] ||
-          template.content.lastChild.previousSibling;
-      }
-
       ready() {
         super.ready();
         console.log('my-button is ready!');
