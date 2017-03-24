@@ -2,28 +2,28 @@
 
 <html>
   <head>
-    <title>my-button test</title>
+    <title>my-icon-button test</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
 
-    <link rel="import" href="../my-button.html">
+    <link rel="import" href="../my-icon-button.html">
   </head>
   <body>
 
     <test-fixture id="basic">
       <template>
-        <my-button></my-button>
+        <my-icon-button></my-icon-button>
       </template>
     </test-fixture>
 
     <script>
-      suite('my-button', function() {
+      suite('my-icon-button', function() {
 
         test('instantiating the element works', function() {
           var element = fixture('basic');
-          assert.equal(element.is, 'my-button');
+          assert.equal(element.is, 'my-icon-button');
         });
 
       });

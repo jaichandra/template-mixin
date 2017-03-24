@@ -1,0 +1,31 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="template-mixin.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<!--
+`my-icon-button`
+@demo demo/index.html 
+-->
+
+<dom-module id="my-icon-button">
+    <template>
+    <style>
+       :host {
+        border: 1px solid #000;
+        background-color: greenyellow;
+        padding-top: 4px;
+        padding-bottom: 4px;
+      }
+    </style>
+  </template>
+
+    <script>
+        'use strict';
+
+        class MyIconButton extends Polymer.TemplateMixin('paper-icon-button') {
+            static get is() {
+                return 'my-icon-button';
+            }
+        }
+        customElements.define(MyIconButton.is, MyIconButton);
+    </script>
+</dom-module>

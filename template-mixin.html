@@ -1,0 +1,66 @@
+<script>
+    (function() {
+        'use strict';
+
+        /**
+         * Mixin to extend Polymer elements along with API to override styles
+         * 
+         * Users can override styles by providing their own <styles> within a <template tag.
+         * 
+         * @PolymerMixin
+         * 
+         * @example
+         * ```
+         * <link rel="import" href="template-mixin.html">
+         * <dom-module id="my-element">
+         *  <template>
+         *      <style>
+         *          ...
+         *      </style>
+         *  </template>         
+         * </dom-module>
+         *          
+         * class MyElement extends Polymer.TemplateMixin('paper-element') {
+         *  ...
+         * }
+         * ```
+         */
+        Polymer.TemplateMixin = (element) => {
+            let superClass = document.createElement(element).constructor;
+            return class extends superClass {
+
+                static get template() {
+                    if (!this.hasOwnProperty('_template')) {
+                        this._template = Polymer.DomModule.import(this.is, 'template') ||
+                            Object.getPrototypeOf(this.prototype).constructor.template;
+                    }
+                    return this._template;
+                }
+
+                static finalize() {
+                    console.log(this);
+                    try {
+                        let superTemplate = superClass.template;
+                        let cssText = Polymer.StyleGather.cssFromTemplate(this.template.cloneNode(true));
+                        if (cssText) {
+                            let style = document.createElement('style');
+                            style.textContent = cssText;
+                            superTemplate.content.insertBefore(style, this.getInsertionPoint(superTemplate));
+                        }
+                        this._template = superTemplate.cloneNode(true);
+                        super.finalize();
+                    } catch (e) {
+                        console.log(e);
+                    }
+                }
+
+                static getInsertionPoint(template) {
+                    // return slot location or last element in the template (ignore the last text node);
+                    return template.content.querySelectorAll('slot')[0] ||
+                        template.content.lastChild.previousSibling;
+                }
+            }
+        }
+
+    })();
+</script>
