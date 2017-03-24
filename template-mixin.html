@@ -38,7 +38,6 @@
                 }
 
                 static finalize() {
-                    console.log(this);
                     try {
                         let superTemplate = superClass.template;
                         let cssText = Polymer.StyleGather.cssFromTemplate(this.template.cloneNode(true));
