@@ -1,10 +1,6 @@
 # template-mixin
 Mixin to extend a Polymer element and also override styles on the base element.
 
-## Install the Polymer-CLI
-
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
-
 ## Usage
 
 ```
@@ -24,6 +20,9 @@ First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polyme
 
 ```
 
+## Install the Polymer-CLI
+
+First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
 
 ```
 $ polymer serve
