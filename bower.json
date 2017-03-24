@@ -1,5 +1,16 @@
 {
   "name": "template-mixin",
+  "description": "Mixin to extend Polymer 2.0 components and override styles",
+  "authors": [
+    "jai.chandra@gmail.com"
+  ],
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jaichandra/template-mixin.git"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/jaichandra/template-mixin",
   "main": "template-mixin.html",
   "dependencies": {
     "paper-icon-button": "PolymerElements/paper-icon-button#2.0-preview",

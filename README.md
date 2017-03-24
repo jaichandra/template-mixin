@@ -1,11 +1,29 @@
-# my-button
-Polymer 2.0 custom element that extends a Polymer 1.0 element and also demonstrates a way to override styles on the base element.
+# template-mixin
+Mixin to extend a Polymer element and also override styles on the base element.
 
 ## Install the Polymer-CLI
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
 
-## Viewing Your Application
+## Usage
+
+```
+<link rel="import" href="template-mixin.html">
+<dom-module id="my-element">
+<template>
+    <style>
+        ...
+    </style>
+    <script>
+        class MyElement extends Polymer.TemplateMixin('paper-element') {
+            ...
+        }
+    </script>
+</template>         
+</dom-module>
+
+```
+
 
 ```
 $ polymer serve
