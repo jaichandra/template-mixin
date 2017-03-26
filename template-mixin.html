@@ -44,7 +44,12 @@
                         if (cssText) {
                             let style = document.createElement('style');
                             style.textContent = cssText;
-                            superTemplate.content.insertBefore(style, this.getInsertionPoint(superTemplate));
+                            let sNode = this.getLastStyleNode(superTemplate);
+                            if (sNode) {
+                                sNode.insertAdjacentElement('afterend', style);
+                            } else {
+                                superTemplate.content.insertBefore(style, superTemplate.content.firstChild);
+                            }
                         }
                         this._template = superTemplate.cloneNode(true);
                         super.finalize();
@@ -53,10 +58,9 @@
                     }
                 }
 
-                static getInsertionPoint(template) {
-                    // return slot location or last element in the template (ignore the last text node);
-                    return template.content.querySelectorAll('slot')[0] ||
-                        template.content.lastChild.previousSibling;
+                static getLastStyleNode(template) {
+                    let styles = template.content.querySelectorAll('style');
+                    return styles[styles.length - 1];
                 }
             }
         }
