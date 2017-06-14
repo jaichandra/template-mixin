@@ -25,44 +25,33 @@
          * }
          * ```
          */
-        Polymer.TemplateMixin = (element) => {
-            let superClass = document.createElement(element).constructor;
+        Polymer.TemplateMixin = (childElement, parentElement) => {
+
+            /**
+             * Returns the last style node in the provided template
+             */
+            function getLastStyleNode(template) {
+                let styles = template.content.querySelectorAll('style');
+                return styles[styles.length - 1];
+            }
+
+            let superClass = customElements.get(parentElement);
+            var childTemplate = Polymer.DomModule.import(childElement, 'template');
+            var parentTemplate = superClass.template.cloneNode(true);
+            let sNode = getLastStyleNode(parentTemplate);
+            let refNode;
+            if (sNode) {
+                refNode = sNode.nextSibling;
+            } else {
+                refNode = parentTemplate.content.firstChild;
+            }
+            parentTemplate.content.insertBefore(childTemplate.content, refNode);
             return class extends superClass {
-
                 static get template() {
-                    if (!this.hasOwnProperty('_template')) {
-                        this._template = Polymer.DomModule.import(this.is, 'template') ||
-                            Object.getPrototypeOf(this.prototype).constructor.template;
-                    }
-                    return this._template;
-                }
-
-                static finalize() {
-                    if (!this.hasOwnProperty('_template')) {
-                        let superTemplate = superClass.template;
-                        let cssText = Polymer.StyleGather.cssFromTemplate(this.template.cloneNode(true));
-                        if (cssText) {
-                            let style = document.createElement('style');
-                            style.textContent = cssText;
-                            let sNode = this.getLastStyleNode(superTemplate);
-                            if (sNode) {
-                                sNode.insertAdjacentElement('afterend', style);
-                            } else {
-                                superTemplate.content.insertBefore(style, superTemplate.content.firstChild);
-                            }
-                        }
-                        this._template = superTemplate.cloneNode(true);
-                    }
-                    super.finalize();
-
-                }
-
-                static getLastStyleNode(template) {
-                    let styles = template.content.querySelectorAll('style');
-                    return styles[styles.length - 1];
+                    return parentTemplate;
                 }
             }
         }
 
-        })();
+    })();
 </script>
