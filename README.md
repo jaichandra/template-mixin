@@ -11,7 +11,7 @@ Mixin to extend a Polymer element and also override styles on the base element.
         ...
     </style>
     <script>
-        class MyElement extends Polymer.TemplateMixin('paper-element') {
+        class MyElement extends Polymer.TemplateMixin('my-element', 'paper-element') {
             ...
         }
     </script>
